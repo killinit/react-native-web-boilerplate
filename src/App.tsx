@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -15,6 +15,7 @@ import {
   Text,
   useColorScheme,
   View,
+  Platform
 } from 'react-native';
 
 type SectionProps = PropsWithChildren<{
@@ -54,6 +55,12 @@ function App(): JSX.Element {
     backgroundColor: isDarkMode ? '#ffff' : '#000000',
   };
 
+  const isWeb = Platform.OS === 'web';
+
+  useEffect(() => {
+    console.log('isWeb', isWeb)
+  }, [])
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -68,7 +75,7 @@ function App(): JSX.Element {
             backgroundColor: isDarkMode ? '#ffff' : '#000000',
           }}>
           <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.web.tsx</Text> to change this
+            Edit <Text style={styles.highlight}>App.web.tsx {isWeb} </Text> to change this
             screen and then come back to see your edits.
           </Section>
           <Section title="See Your Changes"></Section>
